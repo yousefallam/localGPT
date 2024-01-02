@@ -3,6 +3,7 @@ import os
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
 import click
+from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 import torch
 from langchain.docstore.document import Document
 from langchain.embeddings import HuggingFaceInstructEmbeddings
@@ -51,6 +52,8 @@ def load_document_batch(filepaths):
            file_log(name + ' failed to submit')
            return None
         else:
+           file_log(' loaded. pt2')
+
            data_list = [future.result() for future in futures]
            # return data and file paths
            return (data_list, filepaths)
@@ -89,6 +92,7 @@ def load_documents(source_dir: str) -> list[Document]:
         for future in as_completed(futures):
             # open the file and load the data
             try:
+                file_log(' loaded. pt3')
                 contents, _ = future.result()
                 docs.extend(contents)
             except Exception as ex:
@@ -154,16 +158,16 @@ def main(device_type):
     logging.info(f"Split into {len(texts)} chunks of text")
 
     # Create embeddings
-    embeddings = HuggingFaceInstructEmbeddings(
-        model_name=EMBEDDING_MODEL_NAME,
-        model_kwargs={"device": device_type},
-    )
+    # embeddings = HuggingFaceInstructEmbeddings(
+    #     model_name=EMBEDDING_MODEL_NAME,
+    #     model_kwargs={"device": device_type},
+    # )
     # change the embedding type here if you are running into issues.
     # These are much smaller embeddings and will work for most appications
     # If you use HuggingFaceEmbeddings, make sure to also use the same in the
     # run_localGPT.py file.
 
-    # embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
+    embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
 
     db = Chroma.from_documents(
         texts,

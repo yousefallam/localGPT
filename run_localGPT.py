@@ -1,6 +1,7 @@
 import os
 import logging
 import click
+from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 import torch
 import utils
 from langchain.chains import RetrievalQA
@@ -119,9 +120,9 @@ def retrieval_qa_pipline(device_type, use_history, promptTemplate_type="llama"):
     - The QA system retrieves relevant documents using the retriever and then answers questions based on those documents.
     """
 
-    embeddings = HuggingFaceInstructEmbeddings(model_name=EMBEDDING_MODEL_NAME, model_kwargs={"device": device_type})
+    # embeddings = HuggingFaceInstructEmbeddings(model_name=EMBEDDING_MODEL_NAME, model_kwargs={"device": device_type})
     # uncomment the following line if you used HuggingFaceEmbeddings in the ingest.py
-    # embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
+    embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
 
     # load the vectorstore
     db = Chroma(

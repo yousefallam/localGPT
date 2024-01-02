@@ -34,15 +34,11 @@ with st.sidebar:
     st.markdown(
         """
     ## About
-    This app is an LLM-powered chatbot built using:
-    - [Streamlit](https://streamlit.io/)
-    - [LangChain](https://python.langchain.com/)
-    - [LocalGPT](https://github.com/PromtEngineer/localGPT) 
- 
+    This app is an chatbot built with a very powerfull c++ knowledge.
     """
     )
     add_vertical_space(5)
-    st.write("Made with ❤️ by [Prompt Engineer](https://youtube.com/@engineerprompt)")
+    st.write("Made with ❤️ by [Yousef Allam](https://github.com/yousefallam)")
 
 
 if torch.backends.mps.is_available():
