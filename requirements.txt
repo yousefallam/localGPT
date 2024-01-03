@@ -1,6 +1,6 @@
 # Natural Language Processing
 langchain==0.0.267
-chromadb==0.4.6
+chromadb==0.3.29
 pdfminer.six==20221105
 InstructorEmbedding
 sentence-transformers
