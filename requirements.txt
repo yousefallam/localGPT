@@ -24,7 +24,7 @@ bitsandbytes-windows ; sys_platform == 'win32'
 click
 flask
 requests
-pysqlite3
+pysqlite-binary
 
 # Streamlit related
 streamlit
